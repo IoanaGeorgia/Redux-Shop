@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ioanageorgia.github.io/Redux-Shop",
+  "homepage": "https://ioanageorgia.github.io/Redux-Shop/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
