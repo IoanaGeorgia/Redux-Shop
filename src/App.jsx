@@ -3,8 +3,8 @@ import Home from "./components/Home";
 function App() {
 
   return (
-    <Router>
-     <Home />
+    <Router basename={import.meta.env.DEV ? "/" : "/Redux-Shop/"}>
+      <Home />
     </Router>
   );
 }
