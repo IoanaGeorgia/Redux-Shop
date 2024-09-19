@@ -1,0 +1,122 @@
+.contactStore{
+    padding:5% 0rem;
+}
+.contactStore p{
+    margin:10% 0px;
+}
+.contactStore span{
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.contactWrapper{
+    padding:5%;
+    height:85vh;
+}
+.contactWrapper >p{
+    font-size: 2rem;
+    text-align: left;
+}
+.contact{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.contactForm{
+    background-color: #FFE0D3;
+    padding:3% 5%;
+    width:50%;
+    margin-top:-5%;
+}
+.formArea{
+    width:100%;
+        display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.contactForm span, input, textarea{
+    width:100%;
+}
+.contactForm p{
+    margin-bottom:1rem;
+    margin-top:2rem;
+}
+.contactForm span:nth-of-type(1) p{
+    margin-top:0px;
+}
+.contactForm input, .contactForm textarea{
+    padding:1rem 0.5rem;
+    outline: none;
+    border:none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.contactForm textarea{
+    resize: none;
+    margin-bottom:2rem;
+}
+.contactButton{
+        color:white;
+    padding: 0.7rem 2.3rem;
+    background-color: #F56C40;
+    font-size:1.3rem;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+    box-shadow: 3px 3px 0px 0px black;
+
+}
+.contactButton:active{
+        transform: scale(0.99, 0.99);
+    -webkit-transform: scale(0.95, 0.95);
+    -moz-transform: scale(0.99, 0.99);
+    -ms-transform: scale(0.99, 0.99);
+    -o-transform: scale(0.99, 0.99);
+}
+.sentContact{
+    display: flex;
+       flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    height:100%;
+}
+.sentContact button{
+    margin-top:20%;
+}
+
+@media (max-width:850px){
+    .contact, .contactStore{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .contactStore, .contactForm{
+        margin-top:0px;
+        width:100%;
+    }
+    .contactStore p{
+        margin:2% 0px;
+    }
+    .contactForm{
+        width:80%;
+        margin:5% 0px;
+    }
+    .contactWrapper{
+        height:fit-content;
+    }
+    
+    .sentContact{
+       min-height:45vh;
+       
+    }
+    .contactForm{
+        padding: 10% 5%;
+    }
+}
