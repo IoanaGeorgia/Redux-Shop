@@ -38,10 +38,6 @@ const [hasBought, setHasBought] = useState(false);
   }
   let selectedCartItems = useSelector(selectCartItems);
 
-  useEffect(() => {
-    // console.log(selectedCartItems, "selected");
-  }, []);
-
 
 
   return (
@@ -124,7 +120,7 @@ const [hasBought, setHasBought] = useState(false);
                     ) / 100}
                   </p>
                 </div>
-                <button onClick={() => buyItems()}>Buy</button>
+                <button onClick={() => buyItems()}>Place order</button>
               </div>
             </div>
           ) : (

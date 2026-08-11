@@ -3,71 +3,66 @@ import styles from "../styles/Home.module.css";
 import { Link } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
 import { setAuthVals } from "../AuthSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { memo } from "react";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CallIcon from "@mui/icons-material/Call";
 import HomeIcon from "@mui/icons-material/Home";
 import StoreIcon from "@mui/icons-material/Store";
- import { isMobile } from 'react-device-detect';
- import MenuIcon from "@mui/icons-material/Menu";
- import { createPortal } from "react-dom";
+import { isMobile } from "react-device-detect";
+import MenuIcon from "@mui/icons-material/Menu";
+import { createPortal } from "react-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { useLocation } from "react-router-dom";
-
-
+import { selectCartItems } from "../ItemSlice";
 
 function Header() {
+  const [isCartOpened, openCart] = useState(false);
+  const [isLoggedIn, setLogIn] = useState(false);
+  const [logInVals, setLogInVals] = useState({ username: "", password: "" });
+  const [authLoader, setAuthLoader] = useState(false);
+  const [isMobileMenu, openMobileMenu] = useState(false);
+  const dispatch = useDispatch();
 
-    const [isCartOpened, openCart] = useState(false)
-    const [isLoggedIn, setLogIn]  = useState(false)
-    const [logInVals, setLogInVals] = useState({username:"", password:""})
-    const [authLoader, setAuthLoader] = useState(false)
-    const [isMobileMenu, openMobileMenu] = useState(false)
-    const dispatch = useDispatch()
+  const parentComponent = document.getElementById("root");
+  let currentPath = useLocation();
+  let path = currentPath.pathname;
 
-  const parentComponent = document.getElementById('root')
-  let currentPath = useLocation()
-  let path = currentPath.pathname
+  const items = useSelector(selectCartItems);
 
-
-  function openCartFunction(){
-
-    if(path !=='/cart'){
+  function openCartFunction() {
+    if (path !== "/cart") {
       openCart(!isCartOpened);
-    }
-    else{
-      openCart(false)
+    } else {
+      openCart(false);
     }
   }
-  useEffect(()=>{
-    if(path  === '/cart'){
-      openCart(false)
+  useEffect(() => {
+    if (path === "/cart") {
+      openCart(false);
     }
-  }, [path])
+  }, [path]);
 
-    useEffect(()=>{
+  useEffect(() => {
+    setAuthLoader(true);
 
-      setAuthLoader(true)
+    const tempToken = localStorage.getItem("authVals");
+    const token = JSON.parse(tempToken);
 
-      const tempToken = localStorage.getItem("authVals");
-      const token = JSON.parse(tempToken);
-
-
-      if(token && Object.values(token).every(x => x !=="")){
-        setLogIn(true)
-        setLogInVals(token)
-        dispatch(setAuthVals(token))
-      } 
-      setAuthLoader(false)
-
-    },[])
-
+    if (token && Object.values(token).every((x) => x !== "")) {
+      setLogIn(true);
+      setLogInVals(token);
+      dispatch(setAuthVals(token));
+    }
+    setAuthLoader(false);
+  }, []);
 
   return (
     <header className={styles.mainHeader} id="header">
-      <div className={styles.logo}>CasaFashion</div>
+      <Link to="/" className={styles.logo}>
+        <div>CasaFashion</div>
+      </Link>
 
       {isMobile ? (
         <div className={styles.headerMenu}>
@@ -93,14 +88,27 @@ function Header() {
                 <Link to="/items" onTouchStart={() => openMobileMenu(false)}>
                   Items
                 </Link>
-                <a onClick={() => openCart(!isCartOpened)}>Shopping Cart</a>
+                <a
+                  onClick={() => openCart(!isCartOpened)}
+                  className={styles.shoppingBtn}
+                >
+                  Shopping Cart
+                  {items.length > 0 && (
+                    <span className={styles.itemsNumber}>{items.length}</span>
+                  )}
+                </a>
 
                 {authLoader ? (
                   <div>loading</div>
                 ) : (
                   <Link to="/logIn" onTouchStart={() => openMobileMenu(false)}>
                     {isLoggedIn ? (
-                      <>Welcome, {logInVals.username}</>
+                      <>
+                        Welcome,{" "}
+                        <span className={styles.username}>
+                          {logInVals.username}
+                        </span>
+                      </>
                     ) : (
                       <>Account</>
                     )}
@@ -115,7 +123,7 @@ function Header() {
                   <></>
                 )}
               </div>,
-              parentComponent
+              parentComponent,
             )}
         </div>
       ) : (
@@ -168,9 +176,22 @@ function Header() {
                 : ""
             }
           >
-            <span className={styles.landingText}>Shopping Cart</span>
+            <span className={styles.landingText}>
+              <a
+                onClick={() => openCart(!isCartOpened)}
+                className={styles.shoppingBtn}
+              >
+                Shopping Cart
+                {items.length > 0 && (
+                  <span className={styles.itemsNumber}>{items.length}</span>
+                )}
+              </a>
+            </span>
             <span className={styles.landingIcons}>
               <ShoppingCartIcon />
+              {items.length > 0 && (
+                <span className={styles.itemsNumber}>{items.length}</span>
+              )}
             </span>
           </a>
 
@@ -191,7 +212,8 @@ function Header() {
             >
               {isLoggedIn ? (
                 <span className={styles.truncate}>
-                  Welcome, {logInVals.username}
+                  Welcome,{" "}
+                  <span className={styles.username}>{logInVals.username}</span>
                 </span>
               ) : (
                 <>

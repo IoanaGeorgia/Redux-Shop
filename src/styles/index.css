@@ -2,7 +2,8 @@ body, body *{
     box-sizing: border-box;
     padding: 0px;
     margin:0px;
-      font-family: "Roboto", sans-serif;
+   font-family: "Plus Jakarta Sans", sans-serif;
+   line-height:120%;
    
 }body{
     background-color: #FFF9F2;

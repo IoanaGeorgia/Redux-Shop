@@ -23,11 +23,6 @@ function LogIn() {
   const [authVals, setAuthValsLocal] = useState({ username: "", password: "" });
 
 
-
-  useEffect(() => {
-    // console.log(userVals);
-  }, []);
-
   function logOut(){
     localStorage.removeItem("authVals"); 
    
@@ -44,7 +39,6 @@ function LogIn() {
       setFormError(false);
       localStorage.setItem("authVals", JSON.stringify(authVals));
       dispatch(setAuthVals(authVals));
-      // console.log(authVals, "wot");
       window.location.reload();
     }
   }
@@ -64,7 +58,8 @@ function LogIn() {
   return (
     <div className={styles.wrapper}>
       {userVals.username ? (
-        <div className={styles.loggedInWrapper}>
+          <div className={styles.loggedInWrapper}>
+        <div className={styles.loggedInWrapperInfo}>
           <p>Welcome back, {capitalise(userVals.username)} ! </p>
 
           <div>
@@ -86,6 +81,9 @@ function LogIn() {
             <p>If you want to log out from your account, you can do it here:</p>
             <a onClick={() => logOut()}>Log out</a>
           </div>
+        </div>
+
+        <div className={styles.imageWrapper}></div>
         </div>
       ) : (
         <>

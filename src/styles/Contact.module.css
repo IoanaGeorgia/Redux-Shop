@@ -1,122 +1,181 @@
-.contactStore{
-    padding:5% 0rem;
+.contactStore {
+    background-color: #ffcf49;
+    border-radius: 10px;
+    padding: 20px;
+    flex-grow: 1;
 }
-.contactStore p{
-    margin:10% 0px;
+
+.contact a {
+    text-decoration: none;
+    color: #000;
 }
-.contactStore span{
+
+.contact .errorMessage {
+    margin-top: 5px;
+    color: red;
+}
+
+.contactStore p {
+    margin: 5% 0px;
+}
+
+.contactStore span {
     font-weight: bold;
     text-transform: capitalize;
 }
-.contactWrapper{
-    padding:5%;
-    height:85vh;
+
+.contactWrapper {
+    padding: 5% 0px;
+    max-width: 1492px;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: auto;
 }
-.contactWrapper >p{
+
+.contactStore p.title {
     font-size: 2rem;
     text-align: left;
+    font-weight: bold;
+    margin-bottom: 40px;
 }
-.contact{
+
+.contact {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 40px;
 }
-.contactForm{
-    background-color: #FFE0D3;
-    padding:3% 5%;
-    width:50%;
-    margin-top:-5%;
+
+.contactForm {
+    background-color: #d5f178;
+    border-radius: 10px;
+    padding: 20px;
+    width: 50%;
+    min-height: 470px;
 }
-.formArea{
-    width:100%;
-        display: flex;
+
+.formArea {
+    width: 100%;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
-.contactForm span, input, textarea{
-    width:100%;
+
+.formArea div {
+    margin-top: 20px;
 }
-.contactForm p{
-    margin-bottom:1rem;
-    margin-top:2rem;
+
+.contactForm div,
+input,
+textarea {
+    width: 100%;
 }
-.contactForm span:nth-of-type(1) p{
-    margin-top:0px;
+
+.contactForm label {
+    margin-bottom: 15px;
+    display: block;
+    font-weight: bold;
 }
-.contactForm input, .contactForm textarea{
-    padding:1rem 0.5rem;
+
+.contactForm span:nth-of-type(1) label {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.contactForm input,
+.contactForm textarea {
+    padding: 1rem 0.5rem;
     outline: none;
-    border:none;
+    border: none;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+    font-size: 15px;
 }
-.contactForm textarea{
+
+.contactForm textarea {
     resize: none;
-    margin-bottom:2rem;
 }
-.contactButton{
-        color:white;
+
+.contactButton {
+    color: white;
     padding: 0.7rem 2.3rem;
     background-color: #F56C40;
-    font-size:1.3rem;
+    font-size: 1.3rem;
     border-radius: 30px;
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
     -ms-border-radius: 30px;
     -o-border-radius: 30px;
     box-shadow: 3px 3px 0px 0px black;
-
+    margin-top: 2rem;
 }
-.contactButton:active{
-        transform: scale(0.99, 0.99);
+
+.contactButton:active {
+    transform: scale(0.99, 0.99);
     -webkit-transform: scale(0.95, 0.95);
     -moz-transform: scale(0.99, 0.99);
     -ms-transform: scale(0.99, 0.99);
     -o-transform: scale(0.99, 0.99);
 }
-.sentContact{
+
+.sentContact {
     display: flex;
-       flex-direction: column;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    height:100%;
-}
-.sentContact button{
-    margin-top:20%;
+    height: 100%;
 }
 
-@media (max-width:850px){
-    .contact, .contactStore{
+.sentContact p{
+    font-weight: bold;
+    text-align: center;
+}
+
+.sentContact button {
+    margin-top: 5%;
+}
+
+@media (max-width:850px) {
+
+    .contact,
+    .contactStore {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-    .contactStore, .contactForm{
-        margin-top:0px;
-        width:100%;
+
+    .contactStore,
+    .contactForm {
+        margin-top: 0px;
+        width: 100%;
     }
+
+    .contactStore p {
+        margin: 2% 0px;
+    }
+
+
+    .contactWrapper {
+        height: fit-content;
+    }
+
+    .sentContact {
+        min-height: 45vh;
+
+    }
+
+}
+
+@media(max-width:434px){
     .contactStore p{
-        margin:2% 0px;
-    }
-    .contactForm{
-        width:80%;
-        margin:5% 0px;
-    }
-    .contactWrapper{
-        height:fit-content;
-    }
-    
-    .sentContact{
-       min-height:45vh;
-       
-    }
-    .contactForm{
-        padding: 10% 5%;
+        text-align: left;
+        width:100%;
     }
 }

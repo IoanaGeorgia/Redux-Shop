@@ -6,7 +6,9 @@ function Footer() {
   return (
     <footer className={styles.footer}>
       <span>
-        <div className={styles.logo}>CasaFashion</div>
+         <Link to="/" className={styles.logo}>
+      CasaFashion
+         </Link>
       </span>
       <p>
         We are an online shopping service, your number one source for products of all types.

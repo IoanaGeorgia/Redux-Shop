@@ -80,8 +80,7 @@ function LandingPage() {
     <div className={styles.mainLandingWrapper}>
       <main className={styles.main}>
         <div className={styles.flexWrapper}>
-          <div>
-            <img src={bg1}></img>
+          <div className="imageWrapper">
           </div>
           <div>
             <p>Get ready for something new</p>
@@ -122,7 +121,7 @@ function LandingPage() {
             <p>Clients from all over the world</p>
           </div>
           <div>
-            <img src={bg2}></img>
+         
           </div>{" "}
           <div>
             <img src={bg1}></img>
@@ -131,6 +130,7 @@ function LandingPage() {
       </main>
 
       <div className={styles.mainContact}>
+        <div className={styles.mainContactWrapper}>
         <div>
           <p>Stay in touch!</p>
           <p>Contact us, it's just a click away</p>
@@ -138,6 +138,7 @@ function LandingPage() {
         <Link to="/contact">
           <button>Contact us</button>
         </Link>
+        </div>
       </div>
 
       <LazyLoad
