@@ -12,10 +12,18 @@ function Items() {
   let imageRefs = useRef([]);
 
   function addToCart(item, index) {
-    if (item.number === 0) {
-      item.number = 1;
+    const updatedItems = [...items];
+    const currentItem = { ...updatedItems[index] };
+
+    if (currentItem.number === 0) {
+      currentItem.number = 1;
+    } else {
+      currentItem.number += 1;
     }
-    dispatch(add({ ...item, ...{ index: index } }));
+    updatedItems[index] = currentItem;
+    setItems(updatedItems);
+
+    dispatch(add({ ...currentItem, index: index }));
   }
 
   const setImageLoaded = (index) => {
@@ -109,13 +117,11 @@ function Items() {
                     {" "}
                     <span>{item.title}</span> <span>${item.price}</span>
                   </div>
-
-                  {/* <p> {item.description}</p> */}
                   <button
                     className={styles.addButton}
                     onClick={() => addToCart(item, index)}
                   >
-                    Add to Cart
+                    {item.number === 0 ? "Add to Cart" : `${item.number} Added to Cart`}
                   </button>
                 </LazyLoad>
               ))}
