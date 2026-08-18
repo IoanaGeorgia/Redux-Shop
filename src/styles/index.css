@@ -1,19 +1,72 @@
-body, body *{
+body,
+body * {
     box-sizing: border-box;
     padding: 0px;
-    margin:0px;
-   font-family: "Plus Jakarta Sans", sans-serif;
-   line-height:120%;
-   
-}body{
+    margin: 0px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    line-height: 120%;
+
+}
+
+body {
     background-color: #FFF9F2;
 }
- #root{
-     scrollbar-gutter: stable;
-     overflow-y: auto;
+
+#root {
+    scrollbar-gutter: stable;
+    overflow-y: auto;
 }
-button{
-        background-color: transparent;
-    border:none;
+
+button {
+    background-color: transparent;
+    border: none;
     cursor: pointer;
+}
+
+.page {
+    padding: 10vh;
+}
+
+.page-header {
+    padding: 40px;
+    background-color: #d5f178;
+    border-radius: 20px;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.page-header.privacy {
+    background-color: #ffcf49;
+}
+
+.page-header.terms {
+    background-color: #cca3ff;
+}
+
+
+.page .content {
+    margin-top: 20px;
+    padding: 20px;
+
+}
+
+.page h3 {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+@media(max-width:700px) {
+    .page {
+        padding: 5vh;
+    }
+
+    .page .content {
+        padding: 0px;
+        margin-top: 10px;
+    }
+
+    .page h3 {
+        text-align: center;
+    }
+
 }

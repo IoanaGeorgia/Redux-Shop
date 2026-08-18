@@ -4,7 +4,7 @@
 }
 
 .mainHeader {
-  height: 15%;
+  min-height: 15%;
   border-bottom: 1px solid red;
   display: flex;
   justify-content: space-between;
@@ -72,6 +72,18 @@
   font-weight: bold;
 }
 
+.mainHeader button.desktopMenuBtn{
+  display: none;
+  color:#FFF;
+  background: "none";
+  border: "none";
+  cursor: "pointer";
+  display: "inline-flex";
+  align-items: "center";
+  margin-left: "10px";
+  color: "inherit";
+}
+
 .headerHighlightLink {
   position: relative;
 }
@@ -126,7 +138,7 @@
   display: flex;
   justify-content: space-between;
   gap: 2rem;
-  height: 70vh;
+  min-height: 70vh;
   max-width: 1492px;
   width: 100%;
   padding: 20px;
@@ -309,7 +321,7 @@
 }
 
 .flexWrapper:nth-of-type(3)>div:nth-of-type(2) {
-  min-height: 300px;
+  min-height: 250px;
   width: 100%;
   background-image: url("../assets//reduxBG-2.png");
   background-size: cover;
@@ -522,7 +534,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 5%;
-  height: 50vh;
+  min-height: 30vh;
   background-color: #fc6f42;
   color: white;
 }
@@ -533,7 +545,6 @@
   cursor: pointer;
   color: white;
   text-decoration: none;
-  margin: 1rem 0rem;
 }
 
 .footer span a:hover {
@@ -844,6 +855,7 @@ button.closeButton {
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
+    padding-top:20px;
   }
 }
 
@@ -978,6 +990,10 @@ button.closeButton {
     align-items: flex-end;
   }
 
+  .mainHeader button.desktopMenuBtn{
+    display: inline-flex;
+  }
+
   .landingText {
     display: none !important;
   }
@@ -1080,6 +1096,7 @@ button.closeButton {
     flex-direction: column;
     background-position: 30% 50%;
     height: fit-content;
+    min-height:unset;
   }
 
 
@@ -1112,19 +1129,21 @@ button.closeButton {
 }
 
 .headerMobileMenuWrapper {
-  position: absolute;
+  position: fixed;
   top: 0%;
   left: 0%;
   width: 100%;
   height: 100%;
-  background-color: rgba(123, 56, 96, 0.577);
-  backdrop-filter: blur(20px);
+  background-color:#fc6f42;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
   padding: 40% 0%;
   font-size: 1.3rem;
+  z-index:200;
+  pointer-events: auto;
+  gap:20px;
 
 }
 
@@ -1133,6 +1152,30 @@ button.closeButton {
 .headerMobileMenuWrapper a:active {
   color: white;
   text-decoration: none;
+  z-index:200;
+  pointer-events: auto;
+
+}
+
+.headerMobileMenuWrapper a{
+  position: relative;
+}
+
+.headerMobileMenuWrapper a span.itemsNumber{
+position: absolute;
+    top: -10px;
+    right: -15px;
+    min-width: 20px;
+    max-width: 40px;
+    padding: 2px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    background-color: #FFF;
+    color: #000;
+    font-weight: bold;
 
 }
 

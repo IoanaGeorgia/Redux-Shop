@@ -6,9 +6,9 @@ function Footer() {
   return (
     <footer className={styles.footer}>
       <span>
-         <Link to="/" className={styles.logo}>
-      CasaFashion
-         </Link>
+        <Link to="/" className={styles.logo}>
+          CasaFashion
+        </Link>
       </span>
       <p>
         We are an online shopping service, your number one source for products of all types.
@@ -17,11 +17,12 @@ function Footer() {
         CasaFashion has come a long way from its beginnings in Berlin. When Ingrid Liechstenstein and Gilbert Lex first started out, their passion for
         Our wish for worldwide accessibility drove them to found this company, and gave
         them the impetus to turn hard work and inspiration into a booming online
-        store. 
+        store.
       </p>
       <span>
-        <a target="_blank">Customer Care</a>
-        <a target="_blank">Legal Concerns</a>
+        <Link to="/retour-policy">Retour policy</Link>
+        <Link to="/privacy-policy">Privacy policy</Link>
+        <Link to="/terms-and-conditions">Terms of service</Link>
 
         <Link to="/contact">Contact</Link>
       </span>

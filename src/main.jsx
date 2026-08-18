@@ -10,6 +10,9 @@ import store from './store'
 import { Provider } from "react-redux";
 import Contact from "./components/Contact";
 import LogIn from "./components/LogIn";
+import RetourPolicy from "./components/RetourPolicy"
+import PrivacyPolicy from "./components/PrivacyPolicy"
+import TermsandConditions from "./components/TermsandConditions"
 
 const router = createBrowserRouter([
   {
@@ -19,7 +22,10 @@ const router = createBrowserRouter([
       { path: "/items", element: <Items /> },
       { path: "/contact", element: <Contact /> },
       { path: "/logIn", element: <LogIn /> },
-      { path: '/cart', element: <ShoppingCartPage /> }
+      { path: '/cart', element: <ShoppingCartPage /> },
+      { path: '/retour-policy', element: <RetourPolicy /> },
+      { path: '/privacy-policy', element: <PrivacyPolicy /> },
+      { path: '/terms-and-conditions', element: <TermsandConditions /> }
     ],
   },
 ], {

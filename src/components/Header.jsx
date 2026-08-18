@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import styles from "../styles/Home.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
 import { setAuthVals } from "../AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { memo } from "react";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CallIcon from "@mui/icons-material/Call";
@@ -14,7 +13,6 @@ import { isMobile } from "react-device-detect";
 import MenuIcon from "@mui/icons-material/Menu";
 import { createPortal } from "react-dom";
 import CloseIcon from "@mui/icons-material/Close";
-import { useLocation } from "react-router-dom";
 import { selectCartItems } from "../ItemSlice";
 
 function Header() {
@@ -38,6 +36,7 @@ function Header() {
       openCart(false);
     }
   }
+
   useEffect(() => {
     if (path === "/cart") {
       openCart(false);
@@ -48,15 +47,82 @@ function Header() {
     setAuthLoader(true);
 
     const tempToken = localStorage.getItem("authVals");
-    const token = JSON.parse(tempToken);
-
-    if (token && Object.values(token).every((x) => x !== "")) {
-      setLogIn(true);
-      setLogInVals(token);
-      dispatch(setAuthVals(token));
+    if (tempToken) {
+      try {
+        const token = JSON.parse(tempToken);
+        if (token && Object.values(token).every((x) => x !== "")) {
+          setLogIn(true);
+          setLogInVals(token);
+          dispatch(setAuthVals(token));
+        }
+      } catch (e) {
+        console.error("Failed to parse auth token", e);
+      }
     }
     setAuthLoader(false);
-  }, []);
+  }, [dispatch]);
+
+  const renderMenuPortal = () =>
+    isMobileMenu &&
+    parentComponent &&
+    createPortal(
+      <div className={styles.headerMobileMenuWrapper}>
+        <button
+          className={styles.headerMobileClose}
+          onClick={() => openMobileMenu(false)}
+        >
+          <CloseIcon sx={{ fontSize: "46px" }} />
+        </button>
+        <Link
+          to="/"
+          onClick={() => openMobileMenu(false)}
+        >
+          Home
+        </Link>
+        <Link
+          to="/contact"
+          onClick={() => openMobileMenu(false)}
+        >
+          Contact
+        </Link>
+        <Link
+          to="/items"
+          onClick={() => openMobileMenu(false)}
+        >
+          Items
+        </Link>
+        
+        <Link
+          to="/cart"
+          onClick={() => openMobileMenu(false)}
+          className={styles.shoppingBtn}
+        >
+          Shopping Cart
+          {items.length > 0 && (
+            <span className={styles.itemsNumber}>{items.length}</span>
+          )}
+        </Link>
+
+        {authLoader ? (
+          <div>loading</div>
+        ) : (
+          <Link
+            to="/logIn"
+            onClick={() => openMobileMenu(false)}
+          >
+            {isLoggedIn ? (
+              <>
+                Welcome,{" "}
+                <span className={styles.username}>{logInVals.username}</span>
+              </>
+            ) : (
+              <>Account</>
+            )}
+          </Link>
+        )}
+      </div>,
+      parentComponent
+    );
 
   return (
     <header className={styles.mainHeader} id="header">
@@ -64,74 +130,11 @@ function Header() {
         <div>CasaFashion</div>
       </Link>
 
-      {isMobile ? (
-        <div className={styles.headerMenu}>
-          <p onClick={() => openMobileMenu(true)}>
-            <MenuIcon />
-          </p>
-
-          {isMobileMenu &&
-            createPortal(
-              <div className={styles.headerMobileMenuWrapper}>
-                <button
-                  className={styles.headerMobileClose}
-                  onTouchStart={() => openMobileMenu(false)}
-                >
-                  <CloseIcon sx={{ fontSize: "46px" }} />
-                </button>
-                <Link to="/" onTouchStart={() => openMobileMenu(false)}>
-                  Home
-                </Link>
-                <Link to="/contact" onTouchStart={() => openMobileMenu(false)}>
-                  Contact
-                </Link>
-                <Link to="/items" onTouchStart={() => openMobileMenu(false)}>
-                  Items
-                </Link>
-                <a
-                  onClick={() => openCart(!isCartOpened)}
-                  className={styles.shoppingBtn}
-                >
-                  Shopping Cart
-                  {items.length > 0 && (
-                    <span className={styles.itemsNumber}>{items.length}</span>
-                  )}
-                </a>
-
-                {authLoader ? (
-                  <div>loading</div>
-                ) : (
-                  <Link to="/logIn" onTouchStart={() => openMobileMenu(false)}>
-                    {isLoggedIn ? (
-                      <>
-                        Welcome,{" "}
-                        <span className={styles.username}>
-                          {logInVals.username}
-                        </span>
-                      </>
-                    ) : (
-                      <>Account</>
-                    )}
-                  </Link>
-                )}
-
-                {isCartOpened ? (
-                  <>
-                    <ShoppingCart />
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>,
-              parentComponent,
-            )}
-        </div>
-      ) : (
         <span>
           <Link
             to="/"
             className={
-              path == "/"
+              path === "/"
                 ? [styles.landingText, styles.headerHighlightLink].join(" ")
                 : ""
             }
@@ -141,10 +144,11 @@ function Header() {
               <HomeIcon />
             </span>
           </Link>
+
           <Link
             to="/contact"
             className={
-              path == "/contact"
+              path === "/contact"
                 ? [styles.landingText, styles.headerHighlightLink].join(" ")
                 : ""
             }
@@ -154,10 +158,11 @@ function Header() {
               <CallIcon />
             </span>
           </Link>
+
           <Link
             to="/items"
             className={
-              path == "/items"
+              path === "/items"
                 ? [styles.landingText, styles.headerHighlightLink].join(" ")
                 : ""
             }
@@ -171,14 +176,17 @@ function Header() {
           <a
             onClick={() => openCartFunction()}
             className={
-              path == "/cart"
+              path === "/cart"
                 ? [styles.landingText, styles.headerHighlightLink].join(" ")
                 : ""
             }
           >
             <span className={styles.landingText}>
               <a
-                onClick={() => openCart(!isCartOpened)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openCart(!isCartOpened);
+                }}
                 className={styles.shoppingBtn}
               >
                 Shopping Cart
@@ -201,7 +209,7 @@ function Header() {
             <Link
               to="/logIn"
               className={
-                path == "/logIn"
+                path === "/logIn"
                   ? [
                       styles.landingText,
                       styles.headerHighlightLink,
@@ -226,15 +234,18 @@ function Header() {
             </Link>
           )}
 
-          {isCartOpened ? (
-            <>
-              <ShoppingCart />
-            </>
-          ) : (
-            <></>
-          )}
+          <button
+            type="button"
+            className={styles.desktopMenuBtn}
+            onClick={() => openMobileMenu(true)}
+          >
+            <MenuIcon />
+          </button>
+
+          {isCartOpened && <ShoppingCart />}
+          {renderMenuPortal()}
         </span>
-      )}
+  
     </header>
   );
 }
