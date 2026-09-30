@@ -2,17 +2,20 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./styles/index.css";
-import Home from "./components/Home";
-import Items from "./components/Items";
-import LandingPage from "./components/LandingPage";
-import ShoppingCartPage from "./components/ShoppingCartPage";
+
 import store from './store'
 import { Provider } from "react-redux";
-import Contact from "./components/Contact";
-import LogIn from "./components/LogIn";
-import RetourPolicy from "./components/RetourPolicy"
-import PrivacyPolicy from "./components/PrivacyPolicy"
-import TermsandConditions from "./components/TermsandConditions"
+import LandingPage from "./views/LandingPage";
+import Items from "./views/Items";
+import Contact from "./views/Contact";
+import LogIn from "./views/LogIn";
+import ShoppingCartPage from "./views/ShoppingCartPage";
+import RetourPolicy from "./views/RetourPolicy";
+import PrivacyPolicy from "./views/PrivacyPolicy";
+import TermsandConditions from "./views/TermsandConditions";
+import ProductPage from "./views/ProductPage";
+import Home from "./views/Home";
+
 
 const router = createBrowserRouter([
   {
@@ -25,7 +28,9 @@ const router = createBrowserRouter([
       { path: '/cart', element: <ShoppingCartPage /> },
       { path: '/retour-policy', element: <RetourPolicy /> },
       { path: '/privacy-policy', element: <PrivacyPolicy /> },
-      { path: '/terms-and-conditions', element: <TermsandConditions /> }
+      { path: '/terms-and-conditions', element: <TermsandConditions /> },
+      { path: '/products/:id', element: <ProductPage /> }
+      
     ],
   },
 ], {

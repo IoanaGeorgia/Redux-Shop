@@ -13,6 +13,18 @@
     -o-border-radius: 10px;
     height: 400px;
     padding-bottom: 20px;
+    position: relative;
+}
+
+.item .badge{
+    position: absolute;
+    top:10px;
+    left:0px;
+    transform: rotate(-45deg);
+    font-size:2.3rem;
+    font-weight: bolder;
+    z-index:20;
+    color:#FC6F42;
 }
 
 .itemImage {
@@ -29,7 +41,7 @@
     background-color: red;
 }
 
-.item div:nth-of-type(2) {
+.item .info {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -37,14 +49,14 @@
     padding: 5%;
 }
 
-.item div:nth-of-type(2) span:nth-of-type(2) {
+.item .info span:nth-of-type(2) {
     min-width: fit-content;
     font-size: 1.3rem;
     font-weight: bold;
     color: #FC6F42;
 }
 
-.item div:nth-of-type(2) span:nth-of-type(1) {
+.item .info span:nth-of-type(1) {
     font-weight: bolder;
     font-size: 1.1rem;
     max-width: 60%;
@@ -107,17 +119,6 @@
     -webkit-animation: bleep 1s infinite;
 }
 
-.loading {
-    height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: grey;
-    animation: bleep 1s infinite;
-    -webkit-animation: bleep 1s infinite;
-
-}
 
 .error {
     height: 85vh;
@@ -127,6 +128,28 @@
     font-size: 1.5rem;
     color: rgba(255, 0, 0, 0.847);
 }
+
+
+
+@media (max-width:1350px) {
+    .wrapper {
+        padding: 5rem 0%;
+
+    }
+
+   
+
+}
+
+
+@media (max-width:500px) {
+
+
+    .mainWrapper {
+        padding: 0rem 0rem;
+    }
+}
+
 
 @keyframes bleep {
     0% {
@@ -150,21 +173,4 @@
     }
 }
 
-@media (max-width:1350px) {
-    .wrapper {
-        padding: 5rem 0%;
 
-    }
-
-   
-
-}
-
-
-@media (max-width:500px) {
-
-
-    .mainWrapper {
-        padding: 0rem 0rem;
-    }
-}

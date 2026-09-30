@@ -9,7 +9,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CallIcon from "@mui/icons-material/Call";
 import HomeIcon from "@mui/icons-material/Home";
 import StoreIcon from "@mui/icons-material/Store";
-import { isMobile } from "react-device-detect";
 import MenuIcon from "@mui/icons-material/Menu";
 import { createPortal } from "react-dom";
 import CloseIcon from "@mui/icons-material/Close";
@@ -250,4 +249,4 @@ function Header() {
   );
 }
 
-export default memo(Header);
+export default Header;

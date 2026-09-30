@@ -25,7 +25,7 @@
   cursor: pointer;
 }
 
-.mainHeader a:after {
+.mainHeader>a:after {
   content: "";
   position: absolute;
   left: -10%;
@@ -46,7 +46,7 @@
   margin: 0px 0px;
 }
 
-.mainHeader a:hover:after {
+.mainHeader>a:hover:after {
   width: 120%;
 }
 
@@ -72,9 +72,9 @@
   font-weight: bold;
 }
 
-.mainHeader button.desktopMenuBtn{
+.mainHeader button.desktopMenuBtn {
   display: none;
-  color:#FFF;
+  color: #FFF;
   background: "none";
   border: "none";
   cursor: "pointer";
@@ -88,7 +88,7 @@
   position: relative;
 }
 
-.headerHighlightLink :after {
+.headerHighlightLink:after {
   width: 120%;
   content: "";
   position: absolute;
@@ -448,7 +448,8 @@
 }
 
 .reviewArea p:nth-of-type(1),
-.preFooterWrapper>p {
+.preFooterWrapper>p,
+.topContainer .title {
   color: #1e1b13;
   font-size: 2rem;
   font-weight: bold;
@@ -456,6 +457,9 @@
   text-align: center;
 }
 
+.topContainer .title{
+  padding-bottom:3%;
+}
 
 .advertisement {
   max-width: 1492px;
@@ -813,6 +817,7 @@ button.closeButton {
 .noItemsShoppingCart {
   height: 70vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #eba5a8;
@@ -855,7 +860,7 @@ button.closeButton {
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    padding-top:20px;
+    padding-top: 20px;
   }
 }
 
@@ -990,7 +995,7 @@ button.closeButton {
     align-items: flex-end;
   }
 
-  .mainHeader button.desktopMenuBtn{
+  .mainHeader button.desktopMenuBtn {
     display: inline-flex;
   }
 
@@ -1096,7 +1101,7 @@ button.closeButton {
     flex-direction: column;
     background-position: 30% 50%;
     height: fit-content;
-    min-height:unset;
+    min-height: unset;
   }
 
 
@@ -1134,16 +1139,16 @@ button.closeButton {
   left: 0%;
   width: 100%;
   height: 100%;
-  background-color:#fc6f42;
+  background-color: #fc6f42;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   padding: 40% 0%;
   font-size: 1.3rem;
-  z-index:200;
+  z-index: 200;
   pointer-events: auto;
-  gap:20px;
+  gap: 20px;
 
 }
 
@@ -1152,30 +1157,30 @@ button.closeButton {
 .headerMobileMenuWrapper a:active {
   color: white;
   text-decoration: none;
-  z-index:200;
+  z-index: 200;
   pointer-events: auto;
 
 }
 
-.headerMobileMenuWrapper a{
+.headerMobileMenuWrapper a {
   position: relative;
 }
 
-.headerMobileMenuWrapper a span.itemsNumber{
-position: absolute;
-    top: -10px;
-    right: -15px;
-    min-width: 20px;
-    max-width: 40px;
-    padding: 2px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    background-color: #FFF;
-    color: #000;
-    font-weight: bold;
+.headerMobileMenuWrapper a span.itemsNumber {
+  position: absolute;
+  top: -10px;
+  right: -15px;
+  min-width: 20px;
+  max-width: 40px;
+  padding: 2px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  background-color: #FFF;
+  color: #000;
+  font-weight: bold;
 
 }
 
@@ -1286,8 +1291,11 @@ position: absolute;
 
 
 .shoppingPageTotalInfo p {
-  margin-bottom: 15%;
   font-size: 20px;
+}
+
+.shoppingPageTotalInfo p:last-of-type {
+  margin-top: 20px;
 }
 
 .shoppingPageTotalInfo span {
@@ -1297,6 +1305,7 @@ position: absolute;
 .shoppingPageBuyButtonWrapper button {
   font-size: 2rem;
   padding: 1% 5%;
+  margin: 0px;
 }
 
 .boughtWrapper {
@@ -1442,4 +1451,285 @@ position: absolute;
   .shoppingPageBuyButtonWrapper button {
     padding: 0.5rem 2rem;
   }
+}
+
+
+/* Container Layout */
+.shoppingCartPageWrapper {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.shoppingPageWithItems {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 850px) {
+  .shoppingPageWithItems {
+    grid-template-columns: 1.4fr 1fr;
+  }
+}
+
+/* Cart Items Styling */
+.shoppingCartPageItemWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.shoppingCartPageItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 3px 3px 0px #000000;
+}
+
+.shoppingCartPageItem img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.shoppingCartPageTitleWrapper {
+  flex: 1;
+  margin: 0 16px;
+}
+
+.shoppingCartPageTitle {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.shoppingCartPageNumber {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.shoppingCartPageNumber button {
+  background: transparent;
+  border: 1px solid #000;
+  max-width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.shoppingCartPagePrice {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ff3b30;
+}
+
+.checkoutFormWrapper {
+  background-color: #f9f9f9;
+  border: 2px solid #000000;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 4px 4px 0px #000000;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: fit-content;
+}
+
+.checkoutFormWrapper h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.3rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.formGroup input,
+.formGroup textarea {
+  padding: 10px 12px;
+  border: 2px solid #000;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: #f26539;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.checkboxGroup input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #f26539;
+  cursor: pointer;
+}
+
+.shoppingPageTotalInfo {
+  border-top: 2px dashed #ccc;
+  padding-top: 12px;
+  margin-top: 8px;
+}
+
+.shoppingPageTotalInfo p {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+}
+
+.totalPriceText {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.placeOrderBtn {
+  background-color: #f26539;
+  color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 2px 3px 0px #000000;
+  transition: all 0.15s ease-in-out;
+  width: 100%;
+}
+
+.placeOrderBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 3px 5px 0px #000000;
+}
+
+.placeOrderBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.formError {
+  color: #d32f2f;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.boughtWrapper,
+.noItemsShoppingCart {
+  text-align: center;
+  padding: 48px 16px;
+}
+
+.homeBtn {
+  display: inline-block;
+  margin-top: 16px;
+  background-color: #f26539;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0px #000;
+  font-weight: 600;
+}
+
+
+
+.topContainer {
+  padding: 20px;
+  position: relative;
+  max-width: 1400px;
+  width: 100%;
+  margin: auto;
+  margin-top:20px;
+}
+
+.carouselWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.track {
+  display: flex;
+  width: 100%;
+  gap: 40px;
+  padding: 0px 20px;
+}
+
+.scrollable {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.scrollable::-webkit-scrollbar {
+  display: none;
+}
+
+.cardContainer {
+  min-width: 300px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #f26539;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.arrow:hover {
+  background:#9d3414;
+}
+
+.leftArrow {
+  left: -20px;
+}
+
+.rightArrow {
+  right: -20px;
 }

@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import { Link } from "react-router-dom";
 import background from "../assets/background.png"
 import bg1 from "../assets/reduxBG-1.png"
-import bg2 from "../assets/reduxBG-2.png"
 import bg3 from "../assets/reduxBG-3.png"
 import bg4 from "../assets/reduxBG-4.png"
 import LazyLoad from "react-lazyload";
 import { memo } from "react";
-import { LineWeight } from "@mui/icons-material";
+import TopProductsCarousel from "../components/TopProductsCarousel";
+
 
 
 
@@ -140,6 +140,8 @@ function LandingPage() {
         </Link>
         </div>
       </div>
+
+    <TopProductsCarousel />
 
       <LazyLoad
         scrollContainer={scrollParent}

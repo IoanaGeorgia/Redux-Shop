@@ -1,44 +1,52 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "../styles/Contact.module.css";
+import { api } from "../services/apiService";
+import Loading from "../components/Loading";
+
 function Contact() {
   const [isContactSent, setContactSend] = useState(false);
-
-  const [formData, setFormData] = useState({
+  const [isLoading, setIsLoading ] = useState(false);
+  const [formErrors, setFormErrors] = useState({
     name: "",
     email: "",
     message: "",
+    call: ""
   });
 
-  const [formErrors, setFormErrors] = useState({
-    name: "",
-    mail: "",
-    message: "",
-  });
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const messageRef = useRef();
 
-  function submitContact() {
+  async function submitContact() {
+
+    const nameVal = nameRef.current.value;
+    const emailVal = emailRef.current.value;
+    const messageVal = messageRef.current.value;
+
     const errors = {
       name: "",
       email: "",
       message: "",
+      call: ""
     };
 
     let isValid = true;
 
-    if (!formData.name.trim()) {
+    if (!nameVal.trim()) {
       errors.name = "Name is required";
       isValid = false;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email.trim()) {
+    if (!emailVal.trim()) {
       errors.email = "Email is required";
       isValid = false;
-    } else if (!emailRegex.test(formData.email)) {
+    } else if (!emailRegex.test(emailVal)) {
       errors.email = "Invalid email format";
       isValid = false;
     }
 
-    if (!formData.message.trim()) {
+    if (!messageVal.trim()) {
       errors.message = "Message cannot be empty";
       isValid = false;
     }
@@ -46,26 +54,43 @@ function Contact() {
     setFormErrors(errors);
 
     if (isValid) {
-      setContactSend(true);
-      console.log("Form submitted successfully:", formData);
+      const payload = {
+        name: nameVal,
+        email: emailVal,
+        message: messageVal
+      };
+
+      try {
+        setIsLoading(true)
+        const response = await api.post(`/api/contact`, payload);
+        const computedData = response.data || response;
+
+        if (computedData) {
+          setContactSend(true);
+          console.log("Form submitted successfully:", payload);
+        }
+
+        setIsLoading(false)
+      } catch (e) {
+        setIsLoading(false)
+        setFormErrors((prev) => ({
+          ...prev,
+          call: "An error has occurred, please try again later"
+        }));
+
+      }
     }
   }
 
   function refreshContact() {
     setContactSend(false);
-    setFormData({
+    setFormErrors({
       name: "",
       email: "",
       message: "",
+      call: ""
     });
   }
-
-  const handleInput = (e) => {
-    console.log(e.target.value, e.target.name);
-    if (e) {
-      setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    }
-  };
 
   return (
     <div className={styles.contactWrapper}>
@@ -95,7 +120,7 @@ function Contact() {
               <p>Thank you for your message!</p>
               <button
                 className={styles.contactButton}
-                onClick={() => refreshContact()}
+                onClick={refreshContact}
               >
                 New message
               </button>
@@ -106,14 +131,11 @@ function Contact() {
                 <label htmlFor="name">Name:</label>
                 <input
                   id="name"
+                  ref={nameRef}
                   type="text"
                   maxLength="225"
                   placeholder="John Doe"
-                  value={formData.name}
                   name="name"
-                  onChange={(e) => {
-                    handleInput(e);
-                  }}
                 />
                 {formErrors.name && (
                   <p className={styles.errorMessage}>{formErrors.name}</p>
@@ -124,13 +146,10 @@ function Contact() {
                 <label htmlFor="email">Email:</label>
                 <input
                   id="email"
+                  ref={emailRef}
                   type="email"
                   name="email"
                   placeholder="johnDoe@gmail.com"
-                  value={formData.email}
-                  onChange={(e) => {
-                    handleInput(e);
-                  }}
                 />
                 {formErrors.email && (
                   <p className={styles.errorMessage}>{formErrors.email}</p>
@@ -141,25 +160,28 @@ function Contact() {
                 <label htmlFor="message">Message:</label>
                 <textarea
                   id="message"
+                  ref={messageRef}
                   name="message"
                   maxLength="500"
                   placeholder="Type your message here.."
-                  value={formData.message}
-                  onChange={(e) => {
-                    handleInput(e);
-                  }}
                 />
                 {formErrors.message && (
                   <p className={styles.errorMessage}>{formErrors.message}</p>
                 )}
               </div>
 
+              {formErrors.call && (
+                <p className={styles.errorMessage}>{formErrors.call}</p>
+              )}
+
               <button
                 className={styles.contactButton}
-                onClick={() => submitContact()}
+                onClick={submitContact}
               >
                 Submit
               </button>
+
+              {isLoading && <Loading size='sm' />}
             </div>
           )}
         </div>
